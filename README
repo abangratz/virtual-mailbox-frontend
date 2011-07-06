@@ -1,0 +1,8 @@
+# Virtual Mailbox Frontend
+
+This is a web frontend, written in [Ruby on Rails](http://rubyonrails.org), using [datamapper](http://datamapper.org) as
+ORM, for configuring virtual transport (domains) and users (mailboxes) for [dovecot](http://www.dovecot.org) and
+[Postfix](http://www.postfix.org), including support for SASL. You will find configuration examples in doc/examples.
+
+It has been tested successfully with [PostgreSQL 9.0](http://postgresql.org) with pgcrypto on
+[Debian](http://debian.org) Squeeze.
