@@ -1,4 +1,4 @@
-VirtualMailboxFrontent::Application.routes.draw do
+VirtualMailboxFrontend::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

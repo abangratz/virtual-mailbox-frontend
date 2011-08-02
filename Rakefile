@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-VirtualMailboxFrontent::Application.load_tasks
+VirtualMailboxFrontend::Application.load_tasks
