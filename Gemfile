@@ -36,6 +36,7 @@ gem 'dm-is-list', DM_VERSION
 gem 'dm-rails', DM_VERSION
 gem 'dm-devise', :git => 'git://github.com/jm81/dm-devise.git'
 gem 'dm-is-read_only'
+gem 'dm-spec'
 
 gem 'will_paginate', '~> 3.0.pre2'
 
@@ -45,4 +46,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
   gem 'pry-doc'
+  gem 'ZenTest'
+  gem 'autotest-rails'
 end

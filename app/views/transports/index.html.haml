@@ -1,0 +1,17 @@
+%h1 Listing transports
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @transports.each do |transport|
+    %tr
+      %td= link_to 'Show', transport
+      %td= link_to 'Edit', edit_transport_path(transport)
+      %td= link_to 'Destroy', transport, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Transport', new_transport_path

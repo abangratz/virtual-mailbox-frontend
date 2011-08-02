@@ -8,5 +8,9 @@ class Transport
 
   has n, :users, :parent_key => [:domain], :child_key => [:domain], :constraint => :protect
 
+  def to_param
+    self.domain
+  end
+
 
 end

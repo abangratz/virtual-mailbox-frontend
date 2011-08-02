@@ -14,6 +14,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    ZenTest (4.6.0)
     abstract (1.0.0)
     actionmailer (3.0.9)
       actionpack (= 3.0.9)
@@ -43,6 +44,8 @@ GEM
     activesupport (3.0.9)
     addressable (2.2.6)
     arel (2.0.10)
+    autotest-rails (4.1.0)
+      ZenTest
     barista (1.2.1)
       coffee-script (~> 2.2)
     bcrypt-ruby (2.1.4)
@@ -101,6 +104,8 @@ GEM
       dm-core (~> 1.1.0)
       fastercsv (~> 1.5.4)
       json (~> 1.4.6)
+    dm-spec (0.9.10)
+      dm-core
     dm-timestamps (1.1.0)
       dm-core (~> 1.1.0)
     dm-transactions (1.1.0)
@@ -225,6 +230,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest
+  autotest-rails
   barista
   capistrano
   capistrano-ext
@@ -237,6 +244,7 @@ DEPENDENCIES
   dm-observer (~> 1.1.0)
   dm-postgres-adapter (~> 1.1.0)
   dm-rails (~> 1.1.0)
+  dm-spec
   dm-timestamps (~> 1.1.0)
   dm-transactions (~> 1.1.0)
   dm-types (~> 1.1.0)

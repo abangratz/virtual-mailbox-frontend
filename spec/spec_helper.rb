@@ -16,5 +16,10 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
   config.mock_with :rspec
+  config.include(DataMapperMatchers)
+  config.before(:suite) do
+    DataMapper.auto_migrate!
+  end
+
 
 end
