@@ -17,6 +17,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'hpricot'
 gem 'barista'
+gem "therubyracer", :require => 'v8'
 
 gem 'pg'
 
