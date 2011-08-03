@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "transports/edit.html.haml" do
   before(:each) do
-    @transport = assign(:transport, stub_model(Transport))
+    @transport = assign(:transport, stub_model(Transport, :domain => 'test', :transport => 'virtual:', :to_param => 'test'))
   end
 
   it "renders the edit transport form" do

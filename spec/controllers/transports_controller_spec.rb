@@ -24,12 +24,13 @@ describe TransportsController do
   # Transport. As you add validations to Transport, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {'domain' => 'test.com', 'transport' => 'virtual:'}
   end
 
   describe "GET index" do
     it "assigns all transports as @transports" do
-      transport = Transport.create! valid_attributes
+      transport = mock_model(Transport).as_null_object
+      Transport.should_receive(:all).and_return([transport])
       get :index
       assigns(:transports).should eq([transport])
     end
@@ -37,58 +38,67 @@ describe TransportsController do
 
   describe "GET show" do
     it "assigns the requested transport as @transport" do
-      transport = Transport.create! valid_attributes
-      get :show, :id => transport.id.to_s
+      transport = mock_model(Transport).as_null_object
+      Transport.should_receive(:get).with('x').and_return(transport)
+      get :show, :id => 'x'
       assigns(:transport).should eq(transport)
     end
   end
 
   describe "GET new" do
     it "assigns a new transport as @transport" do
+      transport = mock_model(Transport).as_null_object
+      Transport.stub(:new).and_return(transport)
       get :new
-      assigns(:transport).should be_a_new(Transport)
+      assigns(:transport).should eq(transport)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested transport as @transport" do
-      transport = Transport.create! valid_attributes
-      get :edit, :id => transport.id.to_s
+      transport = mock_model(Transport).as_null_object
+      Transport.stub(:get).and_return(transport)
+      get :edit, :id => 'x'
       assigns(:transport).should eq(transport)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
+
+      before(:each) do
+        @transport = mock_model(Transport).as_null_object
+        Transport.stub(:new).and_return(@transport)
+        @transport.stub(:save).and_return(true)
+      end
       it "creates a new Transport" do
-        expect {
-          post :create, :transport => valid_attributes
-        }.to change(Transport, :count).by(1)
+        Transport.should_receive(:new).with(valid_attributes).and_return(@transport)
+        post :create, :transport => valid_attributes
       end
 
       it "assigns a newly created transport as @transport" do
         post :create, :transport => valid_attributes
-        assigns(:transport).should be_a(Transport)
-        assigns(:transport).should be_persisted
+        assigns(:transport).should eq(@transport)
       end
 
       it "redirects to the created transport" do
         post :create, :transport => valid_attributes
-        response.should redirect_to(Transport.last)
+        response.should redirect_to(@transport)
       end
     end
 
     describe "with invalid params" do
+      before(:each) do
+        @transport = mock_model(Transport).as_null_object
+        Transport.stub(:new).and_return(@transport)
+        @transport.stub(:save).and_return(false)
+      end
       it "assigns a newly created but unsaved transport as @transport" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Transport.any_instance.stub(:save).and_return(false)
         post :create, :transport => {}
-        assigns(:transport).should be_a_new(Transport)
+        assigns(:transport).should eq(@transport)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Transport.any_instance.stub(:save).and_return(false)
         post :create, :transport => {}
         response.should render_template("new")
       end
@@ -97,43 +107,41 @@ describe TransportsController do
 
   describe "PUT update" do
     describe "with valid params" do
+      before(:each) do
+        @transport = mock_model(Transport).as_null_object
+        Transport.stub(:get).and_return(@transport)
+        @transport.stub(:update_attributes).and_return(true)
+      end
       it "updates the requested transport" do
-        transport = Transport.create! valid_attributes
-        # Assuming there are no other transports in the database, this
-        # specifies that the Transport created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Transport.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => transport.id, :transport => {'these' => 'params'}
+        Transport.should_receive(:get).with('x').and_return(@transport)
+        @transport.should_receive(:update_attributes).with('these' => 'params').and_return(true)
+        put :update, :id => 'x', :transport => {'these' => 'params'}
       end
 
       it "assigns the requested transport as @transport" do
-        transport = Transport.create! valid_attributes
-        put :update, :id => transport.id, :transport => valid_attributes
-        assigns(:transport).should eq(transport)
+        put :update, :id => 'x', :transport => valid_attributes
+        assigns(:transport).should eq(@transport)
       end
 
       it "redirects to the transport" do
-        transport = Transport.create! valid_attributes
-        put :update, :id => transport.id, :transport => valid_attributes
-        response.should redirect_to(transport)
+        put :update, :id => 'x', :transport => valid_attributes
+        response.should redirect_to(@transport)
       end
     end
 
     describe "with invalid params" do
+      before(:each) do
+        @transport = mock_model(Transport).as_null_object
+        Transport.stub(:get).and_return(@transport)
+        @transport.stub(:update_attributes).and_return(false)
+      end
       it "assigns the transport as @transport" do
-        transport = Transport.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Transport.any_instance.stub(:save).and_return(false)
-        put :update, :id => transport.id.to_s, :transport => {}
-        assigns(:transport).should eq(transport)
+        put :update, :id => 'x', :transport => {}
+        assigns(:transport).should eq(@transport)
       end
 
       it "re-renders the 'edit' template" do
-        transport = Transport.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Transport.any_instance.stub(:save).and_return(false)
-        put :update, :id => transport.id.to_s, :transport => {}
+        put :update, :id => 'x', :transport => {}
         response.should render_template("edit")
       end
     end
@@ -141,15 +149,16 @@ describe TransportsController do
 
   describe "DELETE destroy" do
     it "destroys the requested transport" do
-      transport = Transport.create! valid_attributes
-      expect {
-        delete :destroy, :id => transport.id.to_s
-      }.to change(Transport, :count).by(-1)
+      transport = mock_model(Transport).as_null_object 
+      Transport.should_receive(:get).with('x').and_return(transport)
+      transport.should_receive(:destroy).and_return(true)
+      delete :destroy, :id => 'x'
     end
 
     it "redirects to the transports list" do
-      transport = Transport.create! valid_attributes
-      delete :destroy, :id => transport.id.to_s
+      transport = mock_model(Transport).as_null_object 
+      Transport.stub(:get).and_return(transport)
+      delete :destroy, :id => 'x'
       response.should redirect_to(transports_url)
     end
   end

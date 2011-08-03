@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe UsersController do
+describe MailUsersController do
 
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
@@ -91,7 +91,7 @@ describe UsersController do
 
       it "redirects to the created user" do
         post :create, :user => valid_attributes, :transport_id => 'x'
-        response.should redirect_to([@transport, @user])
+        response.should redirect_to(transport_mail_user_url(@transport, @user))
       end
     end
 
@@ -137,7 +137,7 @@ describe UsersController do
       it "redirects to the user" do
         @user.should_receive(:update_attributes).with({'these' => 'params'}).and_return(true)
         put :update, :id => 'test', :user => {'these' => 'params'}, :transport_id => 'x'
-        response.should redirect_to([@transport, @user])
+        response.should redirect_to(transport_mail_user_url(@transport, @user))
       end
     end
 
@@ -174,7 +174,7 @@ describe UsersController do
       User.should_receive(:get).with(1).and_return(user)
       user.should_receive(:destroy).and_return(true)
       delete :destroy, :id => 1, :transport_id => 'x'
-      response.should redirect_to(transport_users_url(:transport_id => 'x'))
+      response.should redirect_to(transport_mail_users_url(:transport_id => 'x'))
     end
   end
 

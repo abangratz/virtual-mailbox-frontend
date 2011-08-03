@@ -3,7 +3,7 @@ VirtualMailboxFrontend::Application.routes.draw do
   # first created -> highest priority.
   
   resources :transports do
-    resources :users do
+    resources :mail_users do
       resources :virtuals
     end
   end

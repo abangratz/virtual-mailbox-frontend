@@ -1,0 +1,17 @@
+%h1 Listing users
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @users.each do |user|
+    %tr
+      %td= link_to 'Show', transport_mail_user_path(@transport, user)
+      %td= link_to 'Edit', edit_transport_mail_user_path(@transport, user)
+      %td= link_to 'Destroy', transport_mail_user_path(@transport, user), :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New User', new_transport_mail_user_path(@transport)

@@ -1,0 +1,7 @@
+%h1 Editing user
+
+= render 'form'
+
+= link_to 'Show', transport_mail_user_path(@transport, @user)
+\|
+= link_to 'Back', transport_mail_users_path(@transport)

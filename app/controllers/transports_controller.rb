@@ -13,7 +13,7 @@ class TransportsController < ApplicationController
   # GET /transports/1
   # GET /transports/1.xml
   def show
-    @transport = Transport.find(params[:id])
+    @transport = Transport.get(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +34,7 @@ class TransportsController < ApplicationController
 
   # GET /transports/1/edit
   def edit
-    @transport = Transport.find(params[:id])
+    @transport = Transport.get(params[:id])
   end
 
   # POST /transports
@@ -56,7 +56,7 @@ class TransportsController < ApplicationController
   # PUT /transports/1
   # PUT /transports/1.xml
   def update
-    @transport = Transport.find(params[:id])
+    @transport = Transport.get(params[:id])
 
     respond_to do |format|
       if @transport.update_attributes(params[:transport])
@@ -72,7 +72,7 @@ class TransportsController < ApplicationController
   # DELETE /transports/1
   # DELETE /transports/1.xml
   def destroy
-    @transport = Transport.find(params[:id])
+    @transport = Transport.get(params[:id])
     @transport.destroy
 
     respond_to do |format|
