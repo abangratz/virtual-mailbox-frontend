@@ -1,6 +1,9 @@
 VirtualMailboxFrontend::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  #
+  devise_for :mail_admins
+  devise_for :users
   
   resources :transports do
     resources :mail_users do

@@ -1,4 +1,5 @@
 class TransportsController < ApplicationController
+  before_filter :authenticate_mail_admin!
   # GET /transports
   # GET /transports.xml
   def index
