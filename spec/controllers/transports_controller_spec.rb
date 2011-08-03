@@ -19,6 +19,17 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe TransportsController do
+  include Devise::TestHelpers
+  before(:all) do
+    @admin = Factory(:mail_admin)
+  end
+
+  before(:each) do
+    sign_in @admin
+  end
+  after(:each) do
+    sign_out @admin
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Transport. As you add validations to Transport, be sure to

@@ -48,4 +48,5 @@ group :development, :test do
   gem 'pry-doc'
   gem 'ZenTest'
   gem 'autotest-rails'
+  gem 'factory_girl_rails'
 end

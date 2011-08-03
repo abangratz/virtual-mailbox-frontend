@@ -7,5 +7,8 @@ class Virtual
 
   belongs_to :user
 
+  def to_param
+    CGI.escape(address).gsub('.', '%2e')
+  end
 
 end

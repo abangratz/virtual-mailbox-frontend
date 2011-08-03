@@ -125,6 +125,10 @@ GEM
       abstract (>= 1.0.0)
     execjs (1.2.0)
       multi_json (~> 1.0)
+    factory_girl (2.0.2)
+    factory_girl_rails (1.1.0)
+      factory_girl (~> 2.0.0)
+      railties (>= 3.0.0)
     fastercsv (1.5.4)
     haml (3.1.2)
     haml-rails (0.3.4)
@@ -249,6 +253,7 @@ DEPENDENCIES
   dm-transactions (~> 1.1.0)
   dm-types (~> 1.1.0)
   dm-validations (~> 1.1.0)
+  factory_girl_rails
   haml
   haml-rails
   hpricot

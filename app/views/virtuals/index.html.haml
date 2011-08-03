@@ -1,0 +1,18 @@
+%h1 Listing virtuals for 
+ = @user
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @virtuals.each do |virtual|
+    %tr
+      %td= link_to 'Show', transport_mail_user_virtual_path(@transport, @user, virtual)
+      %td= link_to 'Edit', edit_transport_mail_user_virtual_path(@transport, @user, virtual)
+      %td= link_to 'Destroy', transport_mail_user_virtual(@transport, @user, virtual), :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Transport', new_transport_mail_user_virtual_path(@transport, @user)
